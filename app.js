@@ -10,8 +10,8 @@ mongoose.connect("mongodb://localhost/blogApp")
 app.set('view engine', 'ejs')
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(expressSanitizer())
 app.use(methodOverride("_method"))
+app.use(expressSanitizer())
 
 // Mongoose Model Configuration
 const postSchema = new mongoose.Schema({
@@ -40,7 +40,7 @@ app.get('/blogs', (req, res) => {
 
 // Create Route
 app.post('/blogs', (req, res) => {
-    req.body.blog.body = req.santize(req.body.blog.body)
+    req.body.blog.body = req.sanitize(req.body.blog.body)
     Post.create(req.body.blog, (err, blog) => {
         if (err) {
             console.log(err)
@@ -83,7 +83,7 @@ app.get('/blogs/:id/edit', (req, res) => {
 
 // Update Route
 app.put('/blogs/:id', (req, res) => {
-    req.body.blog.body = req.santize(req.body.blog.body)
+    req.body.blog.body = req.sanitize(req.body.blog.body)
     Post.findByIdAndUpdate(req.params.id, req.body.blog, (err, post) => {
         if (err) {
             console.log(err)
