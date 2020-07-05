@@ -1,0 +1,13 @@
+<%- include("partials/header") %> 
+
+<div class="ui main text container">
+    <% posts.forEach((post) => { %>
+        <h1><%= post.title %></h1>
+        <img src="<%=post.image%>">
+        <p>Date Created: <%= post.created.toDateString() %></p>
+        <p><%= post.body.substring(0, 100) %></p>
+        <a href="/blogs/<%=post._id%>">Read More</a>
+    <% }) %> 
+</div>
+
+<%- include("partials/footer") %> 
